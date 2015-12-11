@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
+var jade = require('gulp-jade');
 
 ////////////////////
 // build
@@ -12,6 +13,18 @@ gulp.task('build', ['compile-stylus-onsen', 'jshint']);
 // default
 ////////////////////
 gulp.task('default', $.taskListing.withFilters(null, 'default'));
+
+////////////////////
+// compile-jade
+////////////////////
+gulp.task('compile-jade', function() {
+  return gulp.src([__dirname + '/src/jade/**/*.jade'])
+    .pipe(plumber())
+    .pipe(jade({
+        pretty: true
+    }))
+    .pipe(gulp.dest(__dirname + '/www/views/'));
+});
 
 ////////////////////
 // compile-stylus
@@ -77,6 +90,12 @@ gulp.task('typescript', function() {
 // serve
 ////////////////////
 gulp.task('serve', ['build', 'browser-sync'], function() {
+  gulp.watch(
+    [__dirname + '/src/jade/**/*.jade'],
+    {debounceDelay: 400},
+    ['compile-jade']
+  );
+
   gulp.watch(
     [__dirname + '/src/stylus/**/*.styl'],
     {debounceDelay: 400},
