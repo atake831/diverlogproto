@@ -1,9 +1,9 @@
 
 ons-page .navigation-bar {
-  background-color: transparent;
+  background-color: rgba(231,242,245,0.5);
 }
 ons-tabbar .tab-bar {
-  background-color: transparent;
+  background-color: rgba(231,242,245,0.5);
 }
 
 .tab {
@@ -79,3 +79,4 @@ ons-tabbar .tab-bar {
   color: #999;
   float: right;
 }
+

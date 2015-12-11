@@ -17,6 +17,14 @@
             ons.notification.alert({ message: 'tapped' });
         };
     });
+    app.controller('HomeController', function ($scope) {
+        $scope.viewDetail = function (id) {
+            homeNavigator.pushPage('views/detail.html');
+        };
+        $scope.addContents = function () {
+            ons.notification.alert({ message: 'addContents tapped' });
+        };
+    });
 
     // protoはcordova使わない
     // document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
