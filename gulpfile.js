@@ -2,7 +2,6 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
-var jade = require('gulp-jade');
 
 ////////////////////
 // build
@@ -20,7 +19,7 @@ gulp.task('default', $.taskListing.withFilters(null, 'default'));
 gulp.task('compile-jade', function() {
   return gulp.src([__dirname + '/src/jade/**/*.jade'])
     .pipe(plumber())
-    .pipe(jade({
+    .pipe($.jade({
         pretty: true
     }))
     .pipe(gulp.dest(__dirname + '/www/views/'));
@@ -32,9 +31,9 @@ gulp.task('compile-jade', function() {
 gulp.task('compile-stylus', function() {
   return gulp.src([__dirname + '/src/stylus/**/*.styl'])
     .pipe(plumber())
-    .pipe($.rename(function(path) {
-      path.extname = '.css';
-    }))
+    .pipe($.stylus({errors: true}))
+    .pipe($.concat('style.css'))
+    .pipe($.autoprefixer())
     .pipe(gulp.dest(__dirname + '/www/styles/'));
 });
 

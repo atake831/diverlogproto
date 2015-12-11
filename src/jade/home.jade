@@ -2,10 +2,10 @@ ons-navigator
     ons-page
         ons-toolbar
             div.left
-                ons-toolbar-button(ng-click="doSomething()")
-                  ons-icon(icon="ion-compose")
             div.center Home
             div.right
+                ons-toolbar-button(ng-click="doSomething()")
+                  ons-icon(icon="ion-compose")
         ons-list(style="margin: -1px 0")
             ons-list-item.item(modifier="chevron" ng-repeat="i in [1,2,3,4,5]" ng-click="doSomething()")
                 ons-row
