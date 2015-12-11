@@ -6,7 +6,7 @@ var browserSync = require('browser-sync');
 ////////////////////
 // build
 ////////////////////
-gulp.task('build', ['compile-stylus', 'jshint']);
+gulp.task('build', ['compile-stylus-onsen', 'jshint']);
 
 ////////////////////
 // default
@@ -17,6 +17,18 @@ gulp.task('default', $.taskListing.withFilters(null, 'default'));
 // compile-stylus
 ////////////////////
 gulp.task('compile-stylus', function() {
+  return gulp.src([__dirname + '/src/stylus/**/*.styl'])
+    .pipe(plumber())
+    .pipe($.rename(function(path) {
+      path.extname = '.css';
+    }))
+    .pipe(gulp.dest(__dirname + '/www/styles/'));
+});
+
+////////////////////
+// compile-stylus-onsen
+////////////////////
+gulp.task('compile-stylus-onsen', function() {
   return gulp.src([__dirname + '/www/lib/onsen/stylus/*-theme.styl'])
     .pipe(plumber())
     .pipe($.stylus({errors: true, define: {mylighten: mylighten}}))
@@ -66,9 +78,15 @@ gulp.task('typescript', function() {
 ////////////////////
 gulp.task('serve', ['build', 'browser-sync'], function() {
   gulp.watch(
-    [__dirname + '/www/lib/onsen/stylus/**/*.styl'],
+    [__dirname + '/src/stylus/**/*.styl'],
     {debounceDelay: 400},
     ['compile-stylus']
+  );
+
+  gulp.watch(
+    [__dirname + '/www/lib/onsen/stylus/**/*.styl'],
+    {debounceDelay: 400},
+    ['compile-stylus-onsen']
   );
 
   gulp.watch(
