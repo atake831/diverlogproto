@@ -1,0 +1,27 @@
+
+<ons-page ng-controller="LoggingController">
+  <ons-toolbar>
+    <div class="center">ログ付け</div>
+  </ons-toolbar><br/><span>日付</span>
+  <input ng-model="date"/><span>場所</span>
+  <input ng-model="location"/>
+  <h3>ダイブデータ</h3><span>start_time</span>
+  <input ng-model="start_time"/><span>end_time</span>
+  <input ng-model="end_time"/><span>潜水時間</span>
+  <p>{{ dive_time || 0 }}</p><span>開始残圧</span>
+  <input ng-model="start_pressure"/><span>終了残圧</span>
+  <input ng-model="end_pressure"/><span>消費 </span>
+  <p>{{ consumption_pressure || 0 }}</p><span>平均水深</span>
+  <input ng-model="average_depth"/><span>最大水深</span>
+  <input ng-model="max_depth"/><span>最大水深</span>
+  <input ng-model="max_depth"/>
+  <h3>海況</h3><span>透明度</span>
+  <input ng-model="transparency"/><span>水温</span>
+  <input ng-model="water_temperature"/><span>うねり</span>
+  <input ng-model="undulation"/>
+  <h3>装備</h3><span>スーツ</span>
+  <input ng-model="suit"/><span>タンク</span>
+  <input ng-model="tank"/><span>ウェイト</span>
+  <input ng-model="weight"/><br/>
+  <button ng-click="submit()">submit</button>
+</ons-page>
